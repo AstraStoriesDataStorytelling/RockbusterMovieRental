@@ -1,3 +1,7 @@
-SELECT rating, AVG(rental_duration)
-FROM film
-GROUP BY rating
+SELECT MIN(rental_duration) AS min_rent_duration,
+       MAX(rental_duration) AS max_rent_duration,
+       AVG(rental_duration) AS avg_rent_duration,
+       COUNT(rental_duration) AS count_rent_duration,
+       COUNT(*) AS count_rows
+FROM film;
+
