@@ -1,0 +1,16 @@
+WITH average_amount_cte AS
+(SELECT C.first_name,C.last_name, E.city,
+SUM(amount) as "total_amount_paid"
+FROM payment A
+INNER JOIN rental B ON A.rental_id = B.rental_id
+INNER JOIN customer C ON B.customer_id = C.customer_id
+INNER JOIN address D ON C.address_id = D.address_id
+INNER JOIN city E ON D.city_id = E.city_id
+INNER JOIN country F ON E.country_id = F.country_id
+WHERE city IN ('Aurora','Atlixco','Zalantun','Pontianak','Tarsus','Aparecida de Goinia','Emeishan','Rio
+Claro','Yingkou','Tokat')
+GROUP BY first_name, last_name, city
+ORDER BY SUM(amount) DESC
+LIMIT 5)
+SELECT AVG (total_amount_paid) AS average_amount_paid
+FROM average_amount_cte;
